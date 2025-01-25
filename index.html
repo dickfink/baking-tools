@@ -1,5 +1,96 @@
 <html><head>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <scrip>
+        // calculate fermentation time
+function calculateFermentationTime(){
+    const proofTemp = parseFloat(document.getElementById("proof_temp").value);
+    const levain = parseFloat(document.getElementById("levain").value);
+  
+    if (!proofTemp || !levain) {
+        document.getElementById("ferment-result").textContent = `Please fill out both fields`;
+      return;
+    }
+  
+    const result = Math.log(levain / 100 / 0.894) * 
+      (-0.0000336713 * proofTemp ** 4 + 0.0105207916 * proofTemp ** 3 - 
+       1.2495985607 * proofTemp ** 2 + 67.0024722564 * proofTemp - 1374.6540546564);
+  
+    document.getElementById("ferment-result").textContent = `Hours to ferment: ${result.toFixed(2)} hours`;
+}
+
+// Function to take 100% hydration recipies and convert them to 66% hydration and small amounts of starter.
+function calculateHydration() {
+// Input Values
+const recipeFlour = parseFloat(document.getElementById("recipe-flour").value) || 0;
+const recipeWater = parseFloat(document.getElementById("recipe-water").value) || 0;
+const recipeStarter = parseFloat(document.getElementById("recipe-starter").value) || 0;
+const customStarter = parseFloat(document.getElementById("custom-starter").value) || 0;
+
+if (recipeFlour <= 0 || customStarter <= 0) {
+  document.getElementById("hydration-result").textContent = "Please enter valid recipe flour and custom starter amounts.";
+  return;
+}
+
+// Hydration and Total Weight Calculations
+const totalFlour = recipeFlour + recipeStarter * 0.5; // Starter contributes 50% flour
+const totalWater = recipeWater + recipeStarter * 0.5; // Starter contributes 50% water
+const totalDoughWeight = totalFlour + totalWater;
+
+// Custom Starter Adjustments
+const customStarterFlour = customStarter * 0.6; // 66% hydration starter is 60% flour
+const customStarterWater = customStarter * 0.4; // 66% hydration starter is 40% water
+
+const adjustedFlour = totalFlour - customStarterFlour;
+const adjustedWater = totalWater - customStarterWater;
+
+// Display Results
+document.getElementById("hydration-result").innerHTML = `
+  <strong>Adjusted Recipe:</strong><br>
+  - Flour: ${adjustedFlour.toFixed(2)} g<br>
+  - Water: ${adjustedWater.toFixed(2)} g<br>
+  - Custom Starter (66% hydration): ${customStarter.toFixed(2)} g
+`;
+}
+  
+
+
+// Function to take 11.5% protein flour and increase it with vital wheat
+function calculateFlourProtein() {
+    // Input Values
+    const targetWeight = parseFloat(document.getElementById("target-flour-weight").value) || 0;
+    const targetProtein = parseFloat(document.getElementById("target-protein-percentage").value) || 0;
+  
+    if (targetWeight <= 0 || targetProtein <= 0 || targetProtein > 75) {
+      document.getElementById("protein-result").textContent = "Please enter valid target weight and protein percentage (≤ 75%).";
+      return;
+    }
+  
+    // Constants for Base Flour and Vital Wheat Gluten
+    const baseFlourProtein = 11.5; // 11.5% protein
+    const vitalGlutenProtein = 75; // 75% protein
+  
+    // Solve for the amount of vital wheat gluten (V) and base flour (F)
+    // Equation 1: F + V = targetWeight
+    // Equation 2: (F * baseFlourProtein + V * vitalGlutenProtein) / targetWeight = targetProtein
+    const vitalGluten = (targetWeight * (targetProtein - baseFlourProtein)) / (vitalGlutenProtein - baseFlourProtein);
+    const baseFlour = targetWeight - vitalGluten;
+  
+    if (vitalGluten < 0 || baseFlour < 0) {
+      document.getElementById("protein-result").textContent = "The target protein percentage is too low or unrealistic.";
+      return;
+    }
+  
+    // Display Results
+    document.getElementById("protein-result").innerHTML = `
+      <strong>Adjusted Mix:</strong><br>
+    - Base Flour (11.5% protein): ${baseFlour.toFixed(2)} g<br>
+    - Vital Wheat Gluten (75% protein): ${vitalGluten.toFixed(2)} g<br>
+    - Total Weight: ${targetWeight.toFixed(2)} g<br>
+    - Target Protein: ${targetProtein.toFixed(2)}%
+  `;
+  }
+  
+    </scrip>
     <style type="text/css" data-tag-name="trix-editor">trix-editor {
     display: block;
 }
