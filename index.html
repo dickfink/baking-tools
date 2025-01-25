@@ -1,1 +1,246 @@
-<h1>Bakign Tools</h1>
+<html><head><style type="text/css" data-tag-name="trix-editor">trix-editor {
+    display: block;
+}
+
+trix-editor:empty::before {
+    content: attr(placeholder);
+    color: graytext;
+    cursor: text;
+    pointer-events: none;
+    white-space: pre-line;
+}
+
+trix-editor a[contenteditable=false] {
+    cursor: text;
+}
+
+trix-editor img {
+    max-width: 100%;
+    height: auto;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea {
+    resize: none;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea.trix-autoresize-clone {
+    position: absolute;
+    left: -9999px;
+    max-height: 0px;
+}
+
+trix-editor [data-trix-attachment] figcaption[data-trix-placeholder]:empty::before {
+    content: attr(data-trix-placeholder);
+    color: graytext;
+}
+
+trix-editor [data-trix-cursor-target] {
+    display: inline-block !important;
+    width: 1px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+trix-editor [data-trix-cursor-target=left] {
+    vertical-align: top !important;
+    margin-left: -1px !important;
+}
+
+trix-editor [data-trix-cursor-target=right] {
+    vertical-align: bottom !important;
+    margin-right: -1px !important;
+}</style><style type="text/css" data-tag-name="trix-toolbar">trix-toolbar {
+  display: block;
+}
+
+trix-toolbar {
+  white-space: nowrap;
+}
+
+trix-toolbar [data-trix-dialog] {
+  display: none;
+}
+
+trix-toolbar [data-trix-dialog][data-trix-active] {
+  display: block;
+}
+
+trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid {
+  background-color: #ffdddd;
+}</style><style type="text/css">.turbo-progress-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0076ff;
+  z-index: 2147483647;
+  transition:
+    width 300ms ease-out,
+    opacity 150ms 150ms ease-in;
+  transform: translate3d(0, 0, 0);
+}
+</style>
+    <title>Bread App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="csrf-param" content="authenticity_token">
+
+    
+
+    
+
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="stylesheet" href="/assets/tailwind-0e446f70.css" data-turbo-track="reload">
+<link rel="stylesheet" href="/assets/inter-font-1d90a608.css" data-turbo-track="reload">
+    <link rel="stylesheet" href="/assets/actiontext-e646701d.css" data-turbo-track="reload">
+<link rel="stylesheet" href="/assets/application-8b441ae0.css" data-turbo-track="reload">
+<link rel="stylesheet" href="/assets/application.tailwind-58c65eac.css" data-turbo-track="reload">
+<link rel="stylesheet" href="/assets/tailwind-0e446f70.css" data-turbo-track="reload">
+    <script type="importmap" data-turbo-track="reload">{
+  "imports": {
+    "application": "/assets/application-7d73f603.js",
+    "@hotwired/turbo-rails": "/assets/turbo.min-fae85750.js",
+    "@hotwired/stimulus": "/assets/stimulus.min-4b1e420e.js",
+    "@hotwired/stimulus-loading": "/assets/stimulus-loading-1fc53fe7.js",
+    "trix": "/assets/trix-0d050b00.js",
+    "@rails/actiontext": "/assets/actiontext.esm-f1c04d34.js",
+    "controllers/application": "/assets/controllers/application-3affb389.js",
+    "controllers/hello_controller": "/assets/controllers/hello_controller-708796bd.js",
+    "controllers": "/assets/controllers/index-ee64e1f1.js"
+  }
+}</script>
+<link rel="modulepreload" href="/assets/application-7d73f603.js">
+<link rel="modulepreload" href="/assets/turbo.min-fae85750.js">
+<link rel="modulepreload" href="/assets/stimulus.min-4b1e420e.js">
+<link rel="modulepreload" href="/assets/stimulus-loading-1fc53fe7.js">
+<link rel="modulepreload" href="/assets/trix-0d050b00.js">
+<link rel="modulepreload" href="/assets/actiontext.esm-f1c04d34.js">
+<link rel="modulepreload" href="/assets/controllers/application-3affb389.js">
+<link rel="modulepreload" href="/assets/controllers/hello_controller-708796bd.js">
+<link rel="modulepreload" href="/assets/controllers/index-ee64e1f1.js">
+<script type="module">import "application"</script>
+    <script src="/assets/main-34e924f5.js"></script>
+  <meta name="csrf-token" content="F3NW7XJJ5DDWUs1EcOkFqMG38cTFTtI9F3P5J2Xm2HtE7U16VtoE-53J97aMjeY6gpoPOo0FAO18FK6dbvkfyg"></head>
+<body><nav class="bg-gray-800 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a class="text-2xl" href="/breads">BreadApp</a>
+    <div class="space-x-4">
+      <a class="hover:underline" href="/breads">Home</a>
+      <a class="hover:underline" href="/tools">Bread Tools</a>
+      <a class="hover:underline" href="/breads/new">New Bread</a>
+    </div>
+  </div>
+</nav>
+
+  
+    <main class="container mx-auto mt-28 px-5 flex">
+    
+      <!-- BEGIN app/views/tools/index.html.erb --><div class="container mx-auto p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dough Hydration Calculator -->
+        <div class="bg-white shadow rounded-lg p-6 mb-6 mx-1/2">
+            <h2 class="text-2xl font-semibold mb-4">Dough Hydration Calculator</h2>
+            <form id="hydration-calculator" class="space-y-4">
+                <!-- Recipe Inputs -->
+                <div class="flex flex-col">
+                    <label for="recipe-flour" class="block text-gray-700 font-bold mb-2">Recipe Flour (g)</label>
+                    <input type="number" id="recipe-flour" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="Enter flour amount">
+                </div>
+                <div class="flex flex-col">
+                    <label for="recipe-water" class="block text-gray-700 font-bold mb-2">Recipe Water (g)</label>
+                    <input type="number" id="recipe-water" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="Enter water amount">
+                </div>
+                <div class="flex flex-col">
+                    <label for="recipe-starter" class="block text-gray-700 font-bold mb-2">Recipe Starter (100%
+                        hydration, g)</label>
+                    <input type="number" id="recipe-starter" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="Enter starter amount">
+                </div>
+
+                <!-- Custom Starter Input -->
+                <div class="flex flex-col">
+                    <label for="custom-starter" class="block text-gray-700 font-bold mb-2">Custom Starter (66%
+                        hydration, g)</label>
+                    <input type="number" id="custom-starter" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="Enter custom starter amount">
+                </div>
+
+                <!-- Button and Result -->
+                <button type="button" onclick="calculateHydration()" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">
+                    Calculate Adjusted Recipe
+                </button>
+                <p id="hydration-result" class="text-green-500 font-bold mt-4">
+  <strong>Adjusted Recipe:</strong><br>
+  - Flour: 657.50 g<br>
+  - Water: 511.50 g<br>
+  - Custom Starter (66% hydration): 50.00 g
+</p>
+            </form>
+        </div>
+
+        <!-- Flour Protein Adjustment -->
+        <div class="bg-white shadow rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-semibold mb-4">Adjust Flour Protein with Vital Wheat Gluten</h2>
+            <form id="protein-calculator" class="space-y-4">
+                
+                <!-- Input for Target Flour Weight -->
+                <div class="flex flex-col">
+                    <label for="target-flour-weight" class="block text-gray-700 font-bold mb-2">Target Flour Weight
+                        (g)</label>
+                    <input type="number" id="target-flour-weight" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="Enter target flour weight">
+                </div>
+
+                <!-- Input for Target Protein Percentage -->
+                <div class="flex flex-col">
+                    <label for="target-protein-percentage" class="block text-gray-700 font-bold mb-2">Target Protein
+                        Percentage (%)</label>
+                    <input type="number" value="13.5" id="target-protein-percentage" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="Enter target protein percentage">
+                </div>
+
+                <!-- Button and Result -->
+                <button type="button" onclick="calculateFlourProtein()" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">
+                    Calculate Adjusted Flour Mix
+                </button>
+                <p id="protein-result" class="text-green-500 font-bold mt-4"></p>
+            </form>
+        </div>
+
+<!-- Hours to Ferment -->
+<div class="bg-white shadow rounded-lg p-6 mb-6">
+  <h2 class="text-2xl font-semibold mb-4">Calculate Hours to Ferment:</h2>
+  <form id="ferment-calculator" class="space-y-4">
+    <label for="proof_temp" class="block text-gray-700 font-bold mb-2">Proof Temperature (°F):</label>
+    <input type="number" id="proof_temp" name="proof_temp" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="" required="">
+    
+    <label for="levain" class="block text-gray-700 font-bold mb-2">Levain Percentage (%):</label>
+    <input type="number" id="levain" name="levain" class="w-full px-4 py-2 border rounded-lg shadow-sm" placeholder="" required="">
+
+    <button type="button" id="calculate-ferment" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600" onclick="calculateFermentationTime()">Calculate</button>
+  </form>
+
+  <p id="ferment-result" class="mt-4">Hours to ferment: 7.04 hours</p>
+</div>
+
+
+        <!-- Tare'd Weights -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4">Tare Weights</h2>
+            <ul class="list-disc list-inside">
+                <li>Bulk Tub: 150g</li>
+                <li>KitchenAid Mixing Bowl: 704g</li>
+            </ul>
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6">
+            <img src="/assets/sourdough_chart-a6a9caf1.png">
+        </div>
+</div><!-- END app/views/tools/index.html.erb -->
+    </div></main>
+  
+
+</body></html>
